@@ -1,0 +1,14 @@
+app/etc/modules/MobWeb_CustomCheckoutField.xml app/etc/modules/MobWeb_CustomCheckoutField.xml
+
+app/code/local/MobWeb/CustomCheckoutField app/code/local/MobWeb/CustomCheckoutField/
+
+app/design/frontend/base/default/template/mobweb/customcheckoutfield app/design/frontend/base/default/template/mobweb/customcheckoutfield/
+
+app/design/frontend/base/default/layout/customcheckoutfield.xml app/design/frontend/base/default/layout/customcheckoutfield.xml
+
+app/design/adminhtml/default/default/template/mobweb/customcheckoutfield app/design/adminhtml/default/default/template/mobweb/customcheckoutfield/
+
+app/design/adminhtml/default/default/layout/customcheckoutfield.xml app/design/adminhtml/default/default/layout/customcheckoutfield.xml
+
+# Clear the cache
+@shell   rm -rf $PROJECT/var/cache/* && echo "Magento Cache cleared"

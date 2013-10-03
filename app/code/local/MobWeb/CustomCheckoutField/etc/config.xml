@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <MobWeb_CustomCheckoutField>
+            <version>0.1.0</version>
+        </MobWeb_CustomCheckoutField>
+    </modules>
+    <global>
+    	<models>
+	    	<!-- The model is used to load the Observer class -->
+    		<customcheckoutfield>
+    			<class>MobWeb_CustomCheckoutField_Model</class>
+    		</customcheckoutfield>
+    	</models>
+    	<resources>
+    		<!-- Add the custom field to the "quote" and "order" models -->
+    		<customcheckoutfield_setup>
+    			<setup>
+    				<module>MobWeb_CustomCheckoutField</module>
+    				<class>Mage_Sales_Model_Mysql4_Setup</class>
+    			</setup>
+    		</customcheckoutfield_setup>
+    	</resources>
+    	<fieldsets>
+    		<!-- This helps converting the custom field from a "quote" (cart) to an "order" -->
+    		<sales_convert_quote>
+    			<custom_checkout_field>
+    				<to_order>*</to_order>
+    			</custom_checkout_field>
+    		</sales_convert_quote>
+    	</fieldsets>
+    </global>
+    <frontend>
+    	<layout>
+    		<updates>
+		    	<!-- Update the layout to actually show the custom field during the checkout -->
+    			<custom_checkout_field>
+    				<file>customcheckoutfield.xml</file>
+    			</custom_checkout_field>
+    		</updates>
+    	</layout>
+    	<events>
+	    	<!-- Before saving the quote, the custom field value that is passed as part of the request, has to be added to the quote -->
+    		<sales_quote_save_before>
+    			<observers>
+    				<custom_checkout_field>
+    					<type>singleton</type>
+    					<class>customcheckoutfield/observer</class>
+    					<method>salesQuoteSaveBefore</method>
+    				</custom_checkout_field>
+    			</observers>
+    		</sales_quote_save_before>
+    	</events>
+    </frontend>
+    <adminhtml>
+		<layout>
+			<updates>
+				<!-- The adminhtml has to be updated to show the field in the order overview -->
+				<customcheckoutfield>
+					<file>customcheckoutfield.xml</file>
+				</customcheckoutfield>
+			</updates>
+		</layout>
+	</adminhtml>
+</config>
